@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Callback</title>
+
+</head>
+
+<style>
+
+
+
+
+
+    body {
+
+        background-color: rgb(191, 25, 191);
+
+        text-decoration-color: white;
+
+    }
+
+    
+
+     #container>div{
+
+        border: 1px solid rgb(169, 36, 36);
+
+     }
+
+    
+
+    #container{
+
+        display: grid;
+
+        grid-template-columns: repeat(3,1fr);
+
+        gap:20px
+
+    }
+
+    </style>
+
+
+
+<body>
+
+         <script src="callbacks.js"></script> 
+
+</body>
+
+</html>
+
+
+
+
+
+JAVASCRIPT CODE
+
+
+
+const posts =[
+
+
+
+    { title: 'post one', body:"This is Post One", createdAt: new Date().getTime()},
+
+
+
+    { title: 'Post Two', body:'This is Post Two', createdAt: new Date().getTime()}
+
+
+
+];
+
+
+
+
+
+
+
+let intervalId=0;
+
+
+
+function getPost(){
+
+
+
+    clearInterval(intervalId);
+
+
+
+
+
+
+
+    intervalId=setInterval(()=>{
+
+
+
+        let output='';
+
+
+
+         for(let i=0;i<posts.length;i++){
+
+
+
+            output+= `<li> ${posts[i].title} - last Updated ${(new Date().getTime()  - posts[i].createdAt)/1000} seconds`
+
+
+
+         }
+
+
+
+         console.log('timer running id=', intervalId)
+
+
+
+         document.body.innerHTML=output;
+
+
+
+    }, 1000)
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+ function creatPost(post){
+
+
+
+    setTimeout(()=>{
+
+
+
+        posts.push({...post, createdAt: new Date().getTime()});
+
+
+
+
+
+
+
+
+
+
+
+       // callback();
+
+
+
+    }, 5000)
+
+
+
+ }
+
+
+
+ function creat4thPost(post){
+
+
+
+    setTimeout(()=>{
+
+
+
+        posts.push({...post, createdAt: new Date().getTime()});
+
+
+
+
+
+
+
+       // callback();
+
+
+
+    }, 6000)
+
+
+
+ }
+
+
+
+  getPost();
+
+
+
+ creatPost({ title:'Post three', body: 'This is post three', getPost});
+
+
+
+
+
+
+
+ creat4thPost({title:'Post four', body:'This is post four', getPost});
+
+
+
+
+
+
+
+ var timer;
+
+
+
+ var count =0;
+
+
+
+ function lastEditedSecondsAgo(){
+
+
+
+    count= 0;
+
+
+
+    clearInterval(timer);
+
+
+
+    timer=setInterval(()=>{
+
+
+
+        count++;
+
+
+
+        console.log(count)
+
+
+
+    }, 8000)
+
+
+
+ }
+
+
+
+
+
